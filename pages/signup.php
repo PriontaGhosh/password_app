@@ -5,7 +5,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
     
     if (!empty($username) && !empty($password)) {
-        // logic to be added here next
+        require_once "../database/connect.php";
+require_once "../classes/User.php";
+
+$user = new User($conn);
+if ($user->register($username, $password)) {
+    $message = "Signup successful. You can now login.";
+} else {
+    $message = "Something went wrong. Try again.";
+}
         $message = "Form received.";
     } else {
         $message = "Please fill all fields.";
