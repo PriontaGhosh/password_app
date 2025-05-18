@@ -7,7 +7,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
     
     if (!empty($username) && !empty($password)) {
-        // logic will here
+     require_once "../database/connect.php";
+require_once "../classes/User.php";
+
+$user = new User($conn);
+$loginData = $user->login($username, $password);
+
+if ($loginData) {
+    $_SESSION["user"] = $loginData;
+    header("Location: dashboard.php");
+    exit();
+} else {
+    $message = "Invalid username or password.";
+}
+
         $message = "Login info received.";
     } else {
         $message = "Please fill all fields.";
