@@ -7,6 +7,18 @@ if (!isset($_SESSION["user"])) {
 
 $user = $_SESSION["user"];
 ?>
+$passwordOutput = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // For now just show the input values back
+    $length = $_POST["length"];
+    $upper = $_POST["upper"];
+    $lower = $_POST["lower"];
+    $numbers = $_POST["numbers"];
+    $special = $_POST["special"];
+
+    $passwordOutput = "Length: $length, Upper: $upper, Lower: $lower, Numbers: $numbers, Special: $special";
+}
 
 <!DOCTYPE html>
 <html>
@@ -15,6 +27,9 @@ $user = $_SESSION["user"];
 </head>
 <body>
     <h2>Welcome, <?php echo htmlspecialchars($user["username"]); ?>!</h2>
+      <p>This is your password manager.</p>
+
+    <p><a href="logout.php">Logout</a></p>
     <h3>Generate New Password</h3>
 <form method="POST">
     <label>Length:</label>
@@ -34,9 +49,10 @@ $user = $_SESSION["user"];
 
     <input type="submit" value="Generate Password">
 </form>
+<?php if (!empty($passwordOutput)): ?>
+    <p><strong>Test Output:</strong> <?php echo $passwordOutput; ?></p>
+<?php endif; ?>
 
-    <p>This is your password manager.</p>
-
-    <p><a href="logout.php">Logout</a></p>
+  
 </body>
 </html>
