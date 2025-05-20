@@ -10,15 +10,17 @@ $user = $_SESSION["user"];
 $passwordOutput = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // For now just show the input values back
     $length = $_POST["length"];
     $upper = $_POST["upper"];
     $lower = $_POST["lower"];
     $numbers = $_POST["numbers"];
     $special = $_POST["special"];
 
-    $passwordOutput = "Length: $length, Upper: $upper, Lower: $lower, Numbers: $numbers, Special: $special";
+    require_once "../classes/PasswordGenerator.php";
+    $generator = new PasswordGenerator();
+    $passwordOutput = $generator->generate($length, $upper, $lower, $numbers, $special);
 }
+
 
 <!DOCTYPE html>
 <html>
