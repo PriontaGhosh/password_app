@@ -1,25 +1,29 @@
+<link rel="stylesheet" href="../css/style.css">
 <?php
+session_start();
 $message = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST["username"]);
     $password = $_POST["password"];
-    
+
     if (!empty($username) && !empty($password)) {
         require_once "../database/connect.php";
-require_once "../classes/User.php";
+        require_once "../classes/User.php";
 
-$user = new User($conn);
-if ($user->register($username, $password)) {
-    $message = "Signup successful. You can now login.";
-} else {
-    $message = "Something went wrong. Try again.";
-}
-        $message = "Form received.";
+        $user = new User($conn);
+        if ($user->register($username, $password)) {
+            $message = "Signup successful. You can now login.";
+        } else {
+            $message = "Something went wrong. Try again.";
+        }
+
     } else {
         $message = "Please fill all fields.";
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html>

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../css/style.css">
 <?php
 session_start();
 if (!isset($_SESSION["user"])) {
@@ -5,8 +6,11 @@ if (!isset($_SESSION["user"])) {
     exit();
 }
 
+require_once "../database/connect.php";
+require_once "../classes/PasswordGenerator.php";
+require_once "../classes/PasswordManager.php";
+
 $user = $_SESSION["user"];
-?>
 $passwordOutput = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -17,10 +21,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $numbers = $_POST["numbers"];
     $special = $_POST["special"];
 
-    require_once "../classes/PasswordGenerator.php";
     $generator = new PasswordGenerator();
-    $passwordOutput = $generator->generate($length, $upper, $lower, $numbers, $special);
+    $generatedPassword = $generator->generate($length, $upper, $lower, $numbers, $special);
+
+    $manager = new PasswordManager($conn, $user["aes_key"]);
+    $saved = $manager->savePassword($user["id"], $platform, $generatedPassword);
+
+    if ($saved) {
+        $passwordOutput = "Password for $platform saved successfully: <strong>$generatedPassword</strong>";
+    } else {
+        $passwordOutput = "Something went wrong while saving the password.";
+    }
 }
+?>
+
 
 
 <!DOCTYPE html>
