@@ -10,6 +10,7 @@ $user = $_SESSION["user"];
 $passwordOutput = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $platform = $_POST["platform"];
     $length = $_POST["length"];
     $upper = $_POST["upper"];
     $lower = $_POST["lower"];
@@ -34,6 +35,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <p><a href="logout.php">Logout</a></p>
     <h3>Generate New Password</h3>
 <form method="POST">
+    <label>Platform (e.g. Gmail, Facebook):</label>
+    <input type="text" name="platform" required><br><br>
+
     <label>Length:</label>
     <input type="number" name="length" min="4" required><br><br>
 
@@ -51,6 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <input type="submit" value="Generate Password">
 </form>
+
 <?php if (!empty($passwordOutput)): ?>
     <p><strong>Test Output:</strong> <?php echo $passwordOutput; ?></p>
 <?php endif; ?>
