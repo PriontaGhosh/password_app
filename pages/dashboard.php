@@ -13,17 +13,6 @@ require_once "../classes/PasswordManager.php";
 $user = $_SESSION["user"];
 $passwordOutput = "";
 
-// Load saved passwords for current user
-$savedPasswords = [];
-
-$query = $conn->prepare("SELECT platform, created_at FROM passwords WHERE user_id = ?");
-$query->bind_param("i", $user["id"]);
-$query->execute();
-$result = $query->get_result();
-
-while ($row = $result->fetch_assoc()) {
-    $savedPasswords[] = $row;
-}
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -45,6 +34,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $passwordOutput = "Something went wrong while saving the password.";
     }
+
+    // NOW reload savedPasswords
+    $savedPasswords = [];
+
+    $query = $conn->prepare("SELECT platform, created_at FROM passwords WHERE user_id = ?");
+    $query->bind_param("i", $user["id"]);
+    $query->execute();
+    $result = $query->get_result();
+
+    while ($row = $result->fetch_assoc()) {
+        $savedPasswords[] = $row;
+    }
+
 }
 ?>
 
