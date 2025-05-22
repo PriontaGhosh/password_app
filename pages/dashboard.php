@@ -90,3 +90,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   
 </body>
 </html>
+
+<?php if (!empty($savedPasswords)): ?>
+    <h3>Saved Passwords</h3>
+    <table border="1" cellpadding="6">
+        <tr>
+            <th>Platform</th>
+            <th>Saved At</th>
+        </tr>
+        <?php foreach ($savedPasswords as $entry): ?>
+            <tr>
+                <td><?php echo htmlspecialchars($entry["platform"]); ?></td>
+                <td><?php echo $entry["created_at"]; ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+<?php else: ?>
+    <p>No passwords saved yet.</p>
+<?php endif; ?>
