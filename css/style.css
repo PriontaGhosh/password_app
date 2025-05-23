@@ -47,3 +47,45 @@ h3 {
 a {
   color: #3367d6;
 }
+.success {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 12px;
+  margin-top: 15px;
+  border: 1px solid #c3e6cb;
+  border-radius: 6px;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+table {
+  margin: 30px auto;
+  border-collapse: collapse;
+  width: 80%;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+button {
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+button:hover {
+  background-color: #3367d6;
+}
