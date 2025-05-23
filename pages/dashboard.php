@@ -81,21 +81,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="submit" value="Generate Password">
     </form>
 
-    <!-- ✅ Success message after generation -->
-    <?php if (!empty($passwordOutput)): ?>
-        <div style="padding: 10px; background-color: #e0ffe0; margin-top: 10px;">
-            <?php echo $passwordOutput; ?>
-        </div>
-    <?php endif; ?>
+    <!-- Success message after generation -->
+   <?php if (!empty($passwordOutput)): ?>
+    <div class="success"><?php echo $passwordOutput; ?></div>
+<?php endif; ?>
 
     <hr>
 
-    <!-- ✅ Button to show saved passwords -->
+    <!-- Button to show saved passwords -->
     <form method="GET">
         <button type="submit" name="show" value="1">Show Saved Passwords</button>
     </form>
 
-    <!-- ✅ Display saved passwords table only if requested -->
+    <!-- Display saved passwords table only if requested -->
     <?php if (!empty($savedPasswords)): ?>
         <h3>Saved Passwords</h3>
         <table border="1" cellpadding="6">
